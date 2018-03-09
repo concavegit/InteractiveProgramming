@@ -8,7 +8,7 @@ class Model:
     '''Holds the model of the game state'''
 
     def __init__(self, size):
-        self.box = Box()
+        self.spaceship = Spaceship()
 
 class WindowView:
     def __init__(self, model, size):
@@ -21,32 +21,26 @@ class WindowView:
 
     def draw(self):
         self.screen.fill(pygame.Color(255, 255, 255)) #background color, will be background, foreground
-
-        pygame.draw.rect(self.screen, #draws screen, and a grey nerd
-                         pygame.Color(50, 50, 50),
-                         self.model.box.rect())
-
+        #self.model.spaceship.draw()
+        self.screen.blit(self.model.spaceship.image, self.model.spaceship.rect)
         pygame.display.update()
 
 
-class Box:
-    ''' The state of the nerd '''
+class Spaceship(pygame.sprite.Sprite):
 
-    def __init__(self, x=50, y=50, width=50, height=100):
-        self.height = height
-        self.width = width
-        self.x = x
-        self.y = y
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        #self.rect = pygame.Rect(16, 16)
+        self.image = pygame.image.load("/home/qetu0/python test files/spaceship.png")
+        self.rect = self.image.get_rect()
 
+        #Spaceship = pygame.sprite.RenderPlain()
+        #Spaceship.update()
+        #Spaceship.draw()
 
-    def rect(self):
-        return pygame.Rect(self.x,
-                           self.y,
-                           self.width,
-                           self.height)
-
-
-
+    #def draw(self):
+        #return #pygame.sprite.RenderPlain()
+        #self.screen.blit(self.image, self.rect)
 
 if __name__=='__main__':
     pygame.init()
